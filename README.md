@@ -115,8 +115,8 @@ time.sleep(60)  # Cambia 60 por segundos deseados
 
 ## Licencia
 
-MIT
+N/A
 
 ## Autor
 
-Gmail Auto Mail Manager
+Chávez Aguirre Juan Fernando
