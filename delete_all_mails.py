@@ -1,9 +1,21 @@
 # Script para eliminar todos los correos de Gmail
 import imaplib
 import email
+from dotenv import load_dotenv
+import os
+import json
 
-EMAIL = ""
-PASSWORD = ""
+load_dotenv()
+
+def load_config():
+    """Carga la configuración desde el archivo .json"""
+    with open("config.json", "r") as f:
+        return json.load(f)
+    
+CONFIG = load_config()
+EMAIL = os.getenv("EMAIL")
+PASSWORD = os.getenv("PASSWORD")
+
 
 def delete_all_emails():
     """Elimina todos los correos del inbox"""

@@ -5,9 +5,22 @@ from email.mime.text import MIMEText
 from email.header import decode_header
 import time
 import ollama
+import json
+from dotenv import load_dotenv
+import os
 
-EMAIL = ""
-PASSWORD = ""
+load_dotenv()
+
+def load_config():
+    """Carga la configuración desde el archivo .env"""
+    with open("config.json", "r") as f:
+        return json.load(f)
+    
+CONFIG = load_config()
+EMAIL = os.getenv("EMAIL")
+PASSWORD = os.getenv("PASSWORD")
+MODEL = CONFIG.get("model")
+CHECK_INTERVAL = CONFIG.get("check_interval")
 
 def generar_respuesta_ia(contenido_correo, asunto):
     """Genera una respuesta utilizando Ollama basada en el contenido del correo y el asunto."""
@@ -16,7 +29,7 @@ Asunto: {asunto}
 Contenido: {contenido_correo}
 Responde de forma amigable y concisa (máximo 3 lineas)."""
 
-    response = ollama.chat(model='deepseek-r1:8b', messages=[{"role": "user", "content": promt}])
+    response = ollama.chat(model= MODEL, messages=[{"role": "user", "content": promt}])
     return response['message']['content']
 
 
@@ -69,4 +82,4 @@ def send_reply(to_email, mensaje_personalizado):
 if __name__ == "__main__":
     while True:
         check_mail()
-        time.sleep(60)  # revisa cada 60 segundos
+        time.sleep(CHECK_INTERVAL)  
