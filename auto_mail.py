@@ -6,8 +6,8 @@ from email.header import decode_header
 import time
 import ollama
 
-EMAIL = "rfadtropical8@gmail.com"
-PASSWORD = "cbps rjln dsoy sixe"
+EMAIL = ""
+PASSWORD = ""
 
 def generar_respuesta_ia(contenido_correo, asunto):
     """Genera una respuesta utilizando Ollama basada en el contenido del correo y el asunto."""
